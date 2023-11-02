@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/rs/zerolog/log"
@@ -19,10 +20,10 @@ import (
 const defaultPort = "8080"
 
 func main() {
-	svc,err:=StartApp()
-      if err!=nil{
+	svc, err := StartApp()
+	if err != nil {
 		log.Info().Err(err).Msg("error in app")
-	  }
+	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -30,7 +31,7 @@ func main() {
 	}
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
-		Svc:svc,
+		Svc: svc,
 	}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
@@ -52,13 +53,13 @@ func StartApp() (service.UserService, error) {
 	if err != nil {
 		return &service.Service{}, fmt.Errorf("error in getting the database instance")
 	}
-
+	//hello hi bye
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
 	err = pg.PingContext(ctx)
 	if err != nil {
-		return &service.Service{},  fmt.Errorf("database is not connected: %w", err)
+		return &service.Service{}, fmt.Errorf("database is not connected: %w", err)
 	}
 	repo, err := repo.NewRepository(db)
 	if err != nil {
@@ -69,5 +70,5 @@ func StartApp() (service.UserService, error) {
 		return &service.Service{}, fmt.Errorf("service layer not initialized: %w", err)
 	}
 
-	return svc,  nil
+	return svc, nil
 }
