@@ -15,7 +15,11 @@ type UserRepo interface {
 	CreateUser(userData models.User) (models.User, error)
 	CreateCompany(companyDetails models.Company) (models.Company, error)
 	ViewAllCompanies() ([]*models.Company, error)
-	
+	ViewCompanyByID(cid string)(models.Company,error)
+	CreateJob(models.Job)(models.Job,error)
+	ViewAllJobs()([]*models.Job,error)
+	ViewJobById(id string)(models.Job,error)
+	ViewJobByCid(cid string)([]*models.Job,error)
 	
 }
 

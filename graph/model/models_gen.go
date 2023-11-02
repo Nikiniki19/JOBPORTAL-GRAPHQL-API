@@ -4,15 +4,30 @@ package model
 
 type Company struct {
 	ID          string `json:"id"`
-	Companyname string `json:"companyname"`
-	Address     string `json:"address"`
-	Sal         string `json:"sal"`
+	Name string `json:"companyname"`
+	Location     string `json:"address"`
+	Salary         string `json:"sal"`
+}
+
+type Job struct {
+	ID         string `json:"id"`
+	Cid        string `json:"cid"`
+	Jobtitle   string `json:"jobtitle"`
+	Salary     string `json:"salary"`
+	Experience string `json:"experience"`
 }
 
 type NewCompany struct {
-	Companyname string `json:"companyname"`
-	Address     string `json:"address"`
-	Sal         string `json:"sal"`
+	Name string `json:"companyname"`
+	Location     string `json:"address"`
+	Salary         string `json:"sal"`
+}
+
+type NewJob struct {
+	Cid        string `json:"cid"`
+	Jobtitle   string `json:"jobtitle"`
+	Salary     string `json:"salary"`
+	Experience string `json:"experience"`
 }
 
 type NewUser struct {

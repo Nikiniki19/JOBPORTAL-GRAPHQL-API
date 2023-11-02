@@ -10,6 +10,11 @@ type UserService interface {
 	UserSignup(model.NewUser) (*model.User, error)
 	CreateCompany(model.NewCompany) (*model.Company, error)
 	ViewAllCompanies() ([]*model.Company, error)
+	ViewCompanyByID(cid string) (*model.Company, error)
+	CreateJob(model.NewJob) (*model.Job, error)
+	ViewAllJobs() ([]*model.Job, error)
+	ViewJobByID(id string) (*model.Job, error)
+	ViewJobByCid(cid string)([]*model.Job,error)
 }
 
 type Service struct {

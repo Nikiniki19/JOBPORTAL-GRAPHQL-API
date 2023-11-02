@@ -18,11 +18,42 @@ func (r *mutationResolver) CreateSignup(ctx context.Context, input model.NewUser
 func (r *mutationResolver) CreateCompany(ctx context.Context, input model.NewCompany) (*model.Company, error) {
 	return r.Svc.CreateCompany(input)
 }
-func (r *mutationResolver) ViewAllCompanies(ctx context.Context, input model.NewCompany) ([]*model.Company, error) {
-	return r.Svc.ViewAllCompanies( )
+
+// CreateJob is the resolver for the createJob field.
+func (r *mutationResolver) CreateJob(ctx context.Context, input model.NewJob) (*model.Job, error) {
+	return r.Svc.CreateJob(input)
+}
+
+// ViewAllCompanies is the resolver for the viewAllCompanies field.
+func (r *queryResolver) ViewAllCompanies(ctx context.Context) ([]*model.Company, error) {
+	return r.Svc.ViewAllCompanies()
+}
+
+// ViewCompanyByID is the resolver for the viewCompanyById field.
+func (r *queryResolver) ViewCompanyByID(ctx context.Context, cid string) (*model.Company, error) {
+	return r.Svc.ViewCompanyByID(cid)
+}
+
+// ViewAllJobs is the resolver for the viewAllJobs field.
+func (r *queryResolver) ViewAllJobs(ctx context.Context) ([]*model.Job, error) {
+	return r.Svc.ViewAllJobs()
+}
+
+// ViewJobByID is the resolver for the viewJobById field.
+func (r *queryResolver) ViewJobByID(ctx context.Context, id string) (*model.Job, error) {
+	return r.Svc.ViewJobByID(id)
+}
+
+// ViewJobByCid is the resolver for the viewJobByCid field.
+func (r *queryResolver) ViewJobByCid(ctx context.Context, cid string) ([]*model.Job, error) {
+	return r.Svc.ViewJobByCid(cid)
 }
 
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
+// Query returns QueryResolver implementation.
+func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+
 type mutationResolver struct{ *Resolver }
+type queryResolver struct{ *Resolver }
